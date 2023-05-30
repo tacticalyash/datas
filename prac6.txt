@@ -1,0 +1,83 @@
+prac 6 - simple naive bayes  tp,fp,tn,fn
+
+
+
+import pandas as pd
+
+ import numpy as np
+
+import seaborn as sns
+
+import matplotlib.pyplot as plt
+
+from sklearn.model_selection import train_test_split
+
+from sklearn.naive_bayes import GaussianNB
+
+from sklearn.preprocessing import standardScaler
+
+from sklearn.metrics import confusion_matrix
+
+from sklearn.metrics import classification_report
+
+from sklearn.metrics import accuracy_score
+
+data = pd.read_csv("Iris_Dataset.csv")
+
+data.head()
+
+data.shape
+
+data.isnull().sum()
+
+col = ['SepalLengthCm, 'SepalwidthCm]
+
+data.boxplot
+
+sns.distplot(data['SepalLengthCm])
+
+sns.distplot(data['SepalWidthCm])
+
+col = [PetalLengthCm,PetalWidthCm]
+
+data.boxplot(col)
+
+sns.distplot(data["PetalLengthCm"])
+
+sns.distplot(data['PetalWidthCm])
+
+X = data.drop(['Species'],axis=1)
+y=data['species]
+x_train , x_test , y_train, y_test = train_test_split(x,y,text_size = 0.20,random_state=)
+
+print(x_train.shape)
+print(x_test.shape)
+print(y_train.shape)
+print(y_test.shape)
+
+scaler = StandardScaler()
+X_train = scalar.fit_transform(x_train)
+X_test = scaler.fit_transform(x_test)
+
+x_train
+
+gaussian = GaussianNB()
+
+gaussian.fit(x_train,y_train)
+
+y_pred_test = gaussian.predict(X_test)
+
+y_pred_test
+
+confusion_matrix(y_test,y_pred_test)
+
+print(classification_report(y_test,y_pred_test))
+
+print("Accuracy : ",accuracy_score(y_test,y_pred_test))
+
+
+
+
+
+
+

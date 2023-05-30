@@ -1,0 +1,92 @@
+
+prac 8 -  use seaborn library , code check to how the price of the ticket  . 
+
+import seaborn as sns
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+
+import warnings
+warnings.filterwarnings('ignore')
+
+dataset = sns.load_dataset('titanic')
+dataset.head()
+
+sns.distplot(x=dataset['age'],bins=10)
+
+sns.distplot(x=dataset['age'],bins=10,kde=False)
+
+sns.jointplot(x = dataset['age'],y=dataset['fare'],kind = 'scatter')
+#for plot 2
+sns.jointplot(x = dataset['age'],y=dataset['fare'],kind = 'hex')
+
+sns.rugplot(dataset['fare'])
+
+
+sns.barplot(x='sex',y='age',data=dataset)
+
+
+sns.barplot(x='sex',y='age',data=dataset,estimator=np.std)
+
+
+sns.countplot(x='sex',data=dataset)
+
+
+sns.boxplot(x='sex',y='age',data=dataset)
+
+
+sns.boxplot(x='sex',y='age',data=dataset,hue="survived")
+
+
+sns.violinplot(x='sex',y='age',data=dataset)
+
+
+sns.violinplot(x='sex',y='age',data=dataset,hue='survived')
+
+
+
+sns.stripplot(x='sex',y='age',data=dataset, jitter=False)
+
+
+
+sns.stripplot(x='sex',y='age',data=dataset, jitter=True)
+
+
+
+sns.stripplot(x='sex',y='age',data=dataset, jitter=True,hue='survived')
+
+
+
+
+sns.swarmplot(x='sex',y='age',data=dataset)
+
+
+
+sns.swarmplot(x='sex',y='age',data=dataset,hue='survived')
+
+
+
+dataset.corr()
+
+
+
+corr =dataset.corr()
+sns.heatmap (corr)
+
+
+corr =dataset.corr()
+sns.heatmap (corr,annot=True)
+
+
+corr = dataset.corr()
+# creating a colormap
+colormap = sns.color_palette("mako")
+# creating a heatmap using the colormap
+ax = sns.heatmap(corr, cmap=colormap)
+
+
+dataset = sns.load_dataset('titanic')
+sns.histplot(dataset['fare'], kde=False,bins=10)
+
+
+

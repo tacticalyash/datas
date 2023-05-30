@@ -1,0 +1,169 @@
+prac 5 -  logistic reg to classify on social_network,  TP,FP,TN,FN
+
+
+
+import numpy as np
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+from sklearn.preprocessing import StandardScaler
+from sklearn.metrics import confusion_matrix
+from sklearn.metrics import classification_report
+from sklearn.metrics import accuracy_score
+data=pd.read_csv("Social_Network_Ads.csv")
+data.head()
+
+data.shape
+
+data.isnull().sum()
+
+col=['Age','EstimatedSalary']
+
+In [90]:
+
+In [91]:
+Out[90]: <AxesSubplot:>
+
+C:\Users\Admin\anaconda3\lib\site-packages\seaborn\distributions.py:2619: Fut
+ureWarning: `distplot` is a deprecated function and will be removed in a futu
+re version. Please adapt your code to use either `displot` (a figure-level fu
+nction with similar flexibility) or `histplot` (an axes-level function for hi
+stograms).
+warnings.warn(msg, FutureWarning)
+
+Out[91]: <AxesSubplot:xlabel='Age', ylabel='Density'>
+
+data.boxplot(col)
+
+sns.distplot(data['Age'])
+
+In [92]:
+
+In [93]:
+
+In [94]:
+
+In [95]:
+
+C:\Users\Admin\anaconda3\lib\site-packages\seaborn\distributions.py:2619: Fut
+ureWarning: `distplot` is a deprecated function and will be removed in a futu
+re version. Please adapt your code to use either `displot` (a figure-level fu
+nction with similar flexibility) or `histplot` (an axes-level function for hi
+stograms).
+warnings.warn(msg, FutureWarning)
+
+Out[92]: <AxesSubplot:xlabel='EstimatedSalary', ylabel='Density'>
+
+(320, 2)
+(80, 2)
+(320,)
+(80,)
+sns.distplot(data['EstimatedSalary'])
+
+X=data.drop(['Purchased'],axis=1)
+y=data['Purchased']
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.20, ran
+print(X_train.shape)
+print(X_test.shape)
+print(y_train.shape)
+print(y_test.shape)
+
+scaler=StandardScaler()
+X_train=scaler.fit_transform(X_train)
+X_test=scaler.fit_transform(X_test)
+
+In [96]:
+
+In [97]:
+
+In [98]:
+
+In [99]:
+Out[96]: array([[ 1.92295008e+00, 2.14601566e+00],
+[ 2.02016082e+00, 3.78719297e-01],
+[-1.38221530e+00, -4.32498705e-01],
+[-1.18779381e+00, -1.01194013e+00],
+[ 1.92295008e+00, -9.25023920e-01],
+[ 3.67578135e-01, 2.91803083e-01],
+[ 1.73156642e-01, 1.46942725e-01],
+[ 2.02016082e+00, 1.74040666e+00],
+[ 7.56421121e-01, -8.38107706e-01],
+[ 2.70367388e-01, -2.87638347e-01],
+[ 3.67578135e-01, -1.71750061e-01],
+[-1.18475597e-01, 2.20395980e+00],
+[-1.47942605e+00, -6.35303205e-01],
+[-1.28500455e+00, -1.06988428e+00],
+[-1.38221530e+00, 4.07691369e-01],
+[-1.09058306e+00, 7.55356227e-01],
+[-1.47942605e+00, -2.00722133e-01],
+[ 9.50842613e-01, -1.06988428e+00],
+[ 9.50842613e-01, 5.81523798e-01],
+[ 3 67578135 01 9 87132798 01]
+
+Out[97]: array([[-0.49618606, 0.56021375],
+[ 0.2389044 , -0.59133674],
+[-0.03675452, 0.18673792],
+[-0.49618606, 0.31122986],
+[-0.03675452, -0.59133674],
+[-0.77184498, -1.52502632],
+[-0.40429975, -1.68064126],
+[ 0.05513178, 2.33422397],
+[-1.59882175, -0.03112299],
+[ 1.06588117, -0.80919764],
+[-0.49618606, -0.62245972],
+[-0.67995868, -0.43572181],
+[ 0.14701809, -0.43572181],
+[ 0.33079071, 0.24898389],
+[-1.41504914, 0.52909077],
+[-0.31241345, 1.49390334],
+[ 0.14701809, 0.24898389],
+[-1.50693545, 0.49796778],
+[ 1.80097163, 1.89850216],
+[ 0 03675452 1 46278035]
+
+Out[98]: LogisticRegression()
+
+X_train
+
+X_test
+
+logClassifier=LogisticRegression()
+logClassifier.fit(X_train,y_train)
+
+y_pred_test=logClassifier.predict(X_test)
+
+In [100]:
+
+In [101]:
+
+In [102]:
+
+In [103]:
+
+In [ ]:
+Out[100]: array([0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 1,
+0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0,
+1, 0, 0, 1, 0, 1, 1, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 1, 0, 1, 0, 1,
+0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1, 0, 1, 1], dtype=int64)
+
+Out[101]: array([[52, 6],
+
+[ 3, 19]], dtype=int64)
+
+precision recall f1-score support
+0 0.95 0.90 0.92 58
+1 0.76 0.86 0.81 22
+accuracy 0.89 80
+macro avg 0.85 0.88 0.86 80
+weighted avg 0.89 0.89 0.89 80
+
+Accuracy : 0.8875
+y_pred_test
+
+confusion_matrix(y_test,y_pred_test)
+
+print(classification_report(y_test,y_pred_test))
+
+print("Accuracy : ", accuracy_score(y_test, y_pred_test))

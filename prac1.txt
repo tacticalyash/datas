@@ -1,0 +1,95 @@
+prac 1 :- 
+
+import pandas as pd 
+
+import numpy as np 
+
+df = pd.read_csv('Iris.csv')
+
+df
+
+df.head()
+
+df.tail()
+
+df.index()
+
+RangeIndex(start=0,stop =150,step=1)
+
+df.columns()
+
+Index(['Id', 'SepalLengthCm', 'SepalWidthCm', 'PetalLengthCm',
+'PetalWidthCm',
+ 'Species'],
+ dtype='object')
+
+
+
+df.columns.values
+
+array(['Id', 'SepalLengthCm', 'SepalWidthCm', 'PetalLengthCm',
+ 'PetalWidthCm', 'Species'], dtype=object)
+
+df['Id']
+
+df.shape
+
+df.dtypes
+
+df.describe
+
+df.sort_index(axis=1,ascending=False)
+
+df.sort_values(by='SepalWidthCm')
+
+df.iloc[5]
+
+df.iloc[0:3]
+
+df.isnull()
+
+df.isnull().any()
+
+df.isnull().sum(axis=1)
+
+df.isnull().sum()
+
+df.Id.isnull().sum()
+
+df.dtypes
+
+from sklearn import preprocessing
+#create a minimum and maximum processor object
+
+min_max_scaler=preprocessing.MinMaxScaler()
+#separete the feature from class label
+
+x=df.iloc[:,:4]
+#transform the data to fit function
+
+x_scaled=min_max_scaler.fit_transform(x)
+
+#normalizer on dataframe
+df_normalized=pd.DataFrame(x_scaled)
+
+#view the dataframe
+df_normalized
+
+df['Species'].unique()
+array(['Iris-setosa', 'Iris-versicolor', 'Iris-virginica'],
+dtype=object)
+#define label encoding object
+label_encoder=preprocessing.LabelEncoder()
+#transform to fit function
+df['Species']=label_encoder.fit_transform(df['Species'])
+#unique values
+df['Species'].unique()
+array([0, 1, 2])
+#----------------2)ONE HOT ENCODING------------------
+#unique values from specific columns
+df['Species'].unique()
+array([0, 1, 2])
+#define one hot encoder
+enc=preprocessing.OneHotEncoder()
+#transfrom to fit function
+enc_df=pd.DataFrame(enc.fit_transform(df[['Species']]))

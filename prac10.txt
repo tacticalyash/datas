@@ -1,0 +1,107 @@
+prac 10 -  data visualization 3 
+
+
+
+import numpy as np
+import pandas as pd
+#LOAD THE DATASET INTO DF
+df=pd.read_csv('iris.csv')
+#HEAD
+df.head()
+Id SepalLengthCm SepalWidthCm PetalLengthCm PetalWidthCm
+Species
+
+0 1 5.1 3.5 1.4 0.2 Iris-
+setosa
+
+1 2 4.9 3.0 1.4 0.2 Iris-
+setosa
+
+2 3 4.7 3.2 1.3 0.2 Iris-
+setosa
+
+3 4 4.6 3.1 1.5 0.2 Iris-
+setosa
+
+4 5 5.0 3.6 1.4 0.2 Iris-
+setosa
+
+#REPRESENT THE COL
+df.columns=["col1","col2","col3","col4","col5","col6"]
+#FEATURES IN DATASET
+column=len(list(df))
+column
+6
+#INFO -to show the null or not null values
+df.info()
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 150 entries, 0 to 149
+Data columns (total 6 columns):
+# Column Non-Null Count Dtype
+--- ------ -------------- -----
+0 col1 150 non-null int64
+1 col2 150 non-null float64
+2 col3 150 non-null float64
+3 col4 150 non-null float64
+4 col5 150 non-null float64
+5 col6 150 non-null object
+
+dtypes: float64(4), int64(1), object(1)
+memory usage: 7.2+ KB
+np.unique(df["col5"])
+array([0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 1. , 1.1, 1.2, 1.3, 1.4, 1.5,
+1.6,
+1.7, 1.8, 1.9, 2. , 2.1, 2.2, 2.3, 2.4, 2.5])
+#display summary statistics
+df.describe()
+col1 col2 col3 col4 col5
+count 150.000000 150.000000 150.000000 150.000000 150.000000
+mean 75.500000 5.843333 3.054000 3.758667 1.198667
+std 43.445368 0.828066 0.433594 1.764420 0.763161
+min 1.000000 4.300000 2.000000 1.000000 0.100000
+25% 38.250000 5.100000 2.800000 1.600000 0.300000
+50% 75.500000 5.800000 3.000000 4.350000 1.300000
+75% 112.750000 6.400000 3.300000 5.100000 1.800000
+max 150.000000 7.900000 4.400000 6.900000 2.500000
+# Data Visualization-Create a histogram for each feature in the
+dataset
+#IMPORT THE LIBRARY
+import seaborn as sns
+import matplotlib
+import matplotlib.pyplot as plt
+%matplotlib inline
+df
+col1 col2 col3 col4 col5 col6
+0 1 5.1 3.5 1.4 0.2 Iris-setosa
+1 2 4.9 3.0 1.4 0.2 Iris-setosa
+2 3 4.7 3.2 1.3 0.2 Iris-setosa
+3 4 4.6 3.1 1.5 0.2 Iris-setosa
+4 5 5.0 3.6 1.4 0.2 Iris-setosa
+.. ... ... ... ... ... ...
+145 146 6.7 3.0 5.2 2.3 Iris-virginica
+146 147 6.3 2.5 5.0 1.9 Iris-virginica
+147 148 6.5 3.0 5.2 2.0 Iris-virginica
+148 149 6.2 3.4 5.4 2.3 Iris-virginica
+149 150 5.9 3.0 5.1 1.8 Iris-virginica
+[150 rows x 6 columns]
+fig, axes = plt.subplots(2, 2, figsize=(16, 8))
+axes[0,0].set_title("Distribution of First Column")
+
+axes[0,0].hist(df["col1"]);
+axes[0,1].set_title("Distribution of Second Column")
+axes[0,1].hist(df["col2"]);
+axes[1,0].set_title("Distribution of Third Column")
+axes[1,0].hist(df["col3"]);
+axes[1,1].set_title("Distribution of Fourth Column")
+axes[1,1].hist(df["col4"]);
+
+#Create a boxplot for each feature in the dataset.
+#All of the boxplots should be combined into a single plot.
+data_to_plot = [df["col1"],df["col2"],df["col3"],df["col4"]]
+sns.set_style("whitegrid")
+# Creating a figure instance
+fig = plt.figure(1, figsize=(12,8))
+# Creating an axes instance
+ax = fig.add_subplot(111)
+# Creating the boxplot
+bp = ax.boxplot(data_to_plot);
